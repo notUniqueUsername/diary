@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿namespace DiaryApp
 {
-    partial class Form2
+    partial class AddTaskForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.RemindTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.TaskTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,21 +49,25 @@
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Название задачи";
             // 
-            // dateTimePicker1
+            // RemindTimePicker
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(139, 81);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 29);
-            this.dateTimePicker1.TabIndex = 1;
+            this.RemindTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RemindTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.RemindTimePicker.Location = new System.Drawing.Point(139, 81);
+            this.RemindTimePicker.MinDate = new System.DateTime(1901, 1, 1, 0, 0, 0, 0);
+            this.RemindTimePicker.Name = "RemindTimePicker";
+            this.RemindTimePicker.Size = new System.Drawing.Size(200, 29);
+            this.RemindTimePicker.TabIndex = 1;
             // 
-            // dateTimePicker2
+            // TaskTimePicker
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(139, 40);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 29);
-            this.dateTimePicker2.TabIndex = 2;
+            this.TaskTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TaskTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.TaskTimePicker.Location = new System.Drawing.Point(139, 40);
+            this.TaskTimePicker.MinDate = new System.DateTime(1901, 1, 1, 0, 0, 0, 0);
+            this.TaskTimePicker.Name = "TaskTimePicker";
+            this.TaskTimePicker.Size = new System.Drawing.Size(200, 29);
+            this.TaskTimePicker.TabIndex = 2;
             // 
             // label1
             // 
@@ -124,7 +128,7 @@
             this.button2.Text = "Закончить";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // Form2
+            // AddTaskForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,11 +139,11 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.TaskTimePicker);
+            this.Controls.Add(this.RemindTimePicker);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "Form2";
+            this.Name = "AddTaskForm";
             this.ShowIcon = false;
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -149,8 +153,8 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker RemindTimePicker;
+        private System.Windows.Forms.DateTimePicker TaskTimePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;

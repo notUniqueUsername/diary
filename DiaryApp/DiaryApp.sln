@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryApp", "DiaryApp\DiaryApp.csproj", "{758C1A93-F8ED-487D-9A23-16230DF65DA4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A75A3E2-4E78-4674-9BA1-9C6256FE313C} = {2A75A3E2-4E78-4674-9BA1-9C6256FE313C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryAppLibs", "DiaryAppLibs\DiaryAppLibs.csproj", "{2A75A3E2-4E78-4674-9BA1-9C6256FE313C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{758C1A93-F8ED-487D-9A23-16230DF65DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{758C1A93-F8ED-487D-9A23-16230DF65DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{758C1A93-F8ED-487D-9A23-16230DF65DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A75A3E2-4E78-4674-9BA1-9C6256FE313C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A75A3E2-4E78-4674-9BA1-9C6256FE313C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A75A3E2-4E78-4674-9BA1-9C6256FE313C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A75A3E2-4E78-4674-9BA1-9C6256FE313C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

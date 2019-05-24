@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace DiaryApp
 {
-    public partial class Form3 : Form
+    public partial class AddTaskForm : Form
     {
-        public Form3()
+        public AddTaskForm()
         {
             InitializeComponent();
+            TaskTimePicker.CustomFormat = "dd.MM.yyyy - H:m";
+            RemindTimePicker.CustomFormat = "dd.MM.yyyy - H:m";
         }
     }
 }

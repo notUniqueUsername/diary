@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿namespace DiaryApp
 {
-    partial class Form3
+    partial class CloseForm
     {
         /// <summary>
         /// Required designer variable.

@@ -1,6 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿namespace DiaryApp
 {
-    partial class Form1
+    partial class Mainform
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -39,6 +39,9 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.PrefsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -65,9 +68,9 @@
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(0, 199);
+            this.listView1.Location = new System.Drawing.Point(2, 31);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(166, 214);
+            this.listView1.Size = new System.Drawing.Size(166, 382);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -93,7 +96,7 @@
             this.monthCalendar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.monthCalendar1.BackColor = System.Drawing.Color.LightSalmon;
             this.monthCalendar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.monthCalendar1.Location = new System.Drawing.Point(0, 36);
+            this.monthCalendar1.Location = new System.Drawing.Point(174, 31);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 3;
             // 
@@ -102,7 +105,7 @@
             this.textBox1.BackColor = System.Drawing.Color.DarkCyan;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(0, 2);
+            this.textBox1.Location = new System.Drawing.Point(174, 196);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(115, 22);
             this.textBox1.TabIndex = 4;
@@ -112,30 +115,51 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackColor = System.Drawing.Color.LightBlue;
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.LightSeaGreen;
-            this.button3.Location = new System.Drawing.Point(121, 2);
+            this.button3.Location = new System.Drawing.Point(289, 196);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(49, 23);
             this.button3.TabIndex = 5;
             this.button3.Text = "Найти";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.LightSalmon;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PrefsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(343, 32);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // PrefsToolStripMenuItem
+            // 
+            this.PrefsToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PrefsToolStripMenuItem.Name = "PrefsToolStripMenuItem";
+            this.PrefsToolStripMenuItem.Size = new System.Drawing.Size(118, 28);
+            this.PrefsToolStripMenuItem.Text = "Настройки";
+            // 
+            // Mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSalmon;
-            this.ClientSize = new System.Drawing.Size(170, 454);
+            this.ClientSize = new System.Drawing.Size(343, 454);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Mainform";
             this.ShowIcon = false;
             this.Text = "Ежедневник";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,6 +174,8 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem PrefsToolStripMenuItem;
     }
 }
 
