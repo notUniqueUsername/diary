@@ -15,8 +15,21 @@ namespace DiaryApp
         public AddTaskForm()
         {
             InitializeComponent();
-            TaskTimePicker.CustomFormat = "dd.MM.yyyy - H:m";
-            RemindTimePicker.CustomFormat = "dd.MM.yyyy - H:m";
+            TaskTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
+            RemindTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
+            RemindTimePicker.Enabled = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                RemindTimePicker.Enabled = true;
+            }
+            else if (!checkBox1.Checked)
+            {
+                RemindTimePicker.Enabled = false;
+            }
         }
     }
 }
