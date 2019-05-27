@@ -16,5 +16,13 @@ namespace DiaryApp
         {
             InitializeComponent();
         }
+
+        public bool MinimizeORExit { private set; get; }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MinimizeORExit = radioButton1.Checked;
+            DialogResult = DialogResult.OK;
+        }
     }
 }

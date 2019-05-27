@@ -119,7 +119,7 @@ namespace DiaryAppLibs
         }
 
         [JsonConstructor]
-        public DiaryTask(string name, DateTime taskDate, bool remind, string filename = "", string remindDate = "01.01.0001 0:00:00")
+        public DiaryTask(string name, DateTime taskDate, bool remind, string filename = "", string reminderDate = "01.01.0001 0:00:00")
         {
             Name = name;
             FileName = filename;
@@ -128,7 +128,7 @@ namespace DiaryAppLibs
             if (remind)
             {
                 DateTime reminddate;
-                DateTime.TryParse(remindDate, out reminddate);
+                var c = DateTime.TryParse(reminderDate, out reminddate);
                 ReminderDate = reminddate;
             }
             else

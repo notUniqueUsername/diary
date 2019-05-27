@@ -67,6 +67,7 @@ namespace DiaryApp
 
         private void LockUnlock()
         {
+
             if (textBox1.Enabled)
             {
                 textBox1.Enabled = false;
@@ -81,7 +82,11 @@ namespace DiaryApp
                 button1.Enabled = true;
                 checkBox1.Enabled = true;
                 TaskTimePicker.Enabled = true;
-                RemindTimePicker.Enabled = true;
+                if (checkBox1.Checked)
+                {
+                    RemindTimePicker.Enabled = true;
+                }
+                
             }
         }
 

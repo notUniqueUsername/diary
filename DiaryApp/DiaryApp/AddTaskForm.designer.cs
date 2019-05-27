@@ -160,7 +160,7 @@
             this.Controls.Add(this.TaskTimePicker);
             this.Controls.Add(this.RemindTimePicker);
             this.Controls.Add(this.textBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "AddTaskForm";
             this.ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

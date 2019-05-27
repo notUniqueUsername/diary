@@ -63,8 +63,9 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Ок";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form3
+            // CloseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,8 +76,8 @@
             this.Controls.Add(this.radioButton1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.Name = "Form3";
+            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Name = "CloseForm";
             this.ShowIcon = false;
             this.Text = "Выберите";
             this.ResumeLayout(false);

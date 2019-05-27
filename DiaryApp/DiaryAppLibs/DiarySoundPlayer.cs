@@ -30,7 +30,7 @@ namespace DiaryAppLibs
         {
             _outputDevice?.Stop();
         }
-        public void ring()
+        public void Ring()
         {
             if (waveOut == null)
             {
