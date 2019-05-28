@@ -27,7 +27,7 @@ namespace DiaryAppLibs
         {
             if (filePath == "Standart")
             {
-                filePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"\Preferences.diarypref";
+                filePath = Environment.CurrentDirectory.ToString() + @"\Preferences.diarypref";
             }
             try
             {
@@ -39,7 +39,7 @@ namespace DiaryAppLibs
             }
             catch (System.IO.FileNotFoundException)
             {
-                var project = new DiaryPrefeferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3");
+                var project = new DiaryPrefeferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3");
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
