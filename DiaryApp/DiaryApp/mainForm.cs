@@ -16,13 +16,15 @@ namespace DiaryApp
         public Mainform()
         {
             InitializeComponent();
-            timer1.Interval = 1000;
-            //_diaryTaskList = new DiaryTaskList();
+            TimerForRemind.Interval = 1000;
+            _diaryPrefeferences = SaveLoad.LoadPrefs();
+            sp = new DiarySoundPlayer(_diaryPrefeferences.AudioPath);
             _diaryTaskList = SaveLoad.LoadFromFile();
             _displayedDiaryTaskList = _diaryTaskList;
             UpdateMainList();
         }
-        private DiarySoundPlayer sp = new DiarySoundPlayer(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3");
+        private DiaryPrefeferences _diaryPrefeferences;
+        private DiarySoundPlayer sp;
         private DiaryTaskList _diaryTaskList;
         private DiaryTaskList _displayedDiaryTaskList;
         private DiaryTaskList _displayedFindDiaryTaskList;
@@ -30,10 +32,14 @@ namespace DiaryApp
         private void UpdateMainList()
         {
             var list = new List<string>();
-            foreach (var item in _displayedDiaryTaskList.TaskList)
+            if (_displayedDiaryTaskList.TaskList.Count !=0)
             {
-                list.Add(item.Name);
+                foreach (var item in _displayedDiaryTaskList.TaskList)
+                {
+                    list.Add(item.Name);
+                }
             }
+
             TaskListBox.DataSource = list;
         }
 
@@ -47,7 +53,7 @@ namespace DiaryApp
             FindListBox.DataSource = list;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             var addTaskForm = new AddTaskForm();
             if (addTaskForm.ShowDialog()== DialogResult.OK)
@@ -72,10 +78,19 @@ namespace DiaryApp
                 {
                     var index = _diaryTaskList.TaskList.FindIndex(x => CompareDate(x.TaskDate, changedTask.TaskDate, true) &&
                     x.Name == changedTask.Name);
-                    _diaryTaskList.TaskList.RemoveAt(index);
-                    _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
-                    _displayedDiaryTaskList.TaskList.RemoveAt(n);
-                    _displayedDiaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
+                    if (_diaryTaskList.TaskList == _displayedDiaryTaskList.TaskList)
+                    {
+                        _diaryTaskList.TaskList.RemoveAt(index);
+                        _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
+                        _displayedDiaryTaskList = _diaryTaskList;
+                    }
+                    else
+                    {
+                        _diaryTaskList.TaskList.RemoveAt(index);
+                        _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
+                        _displayedDiaryTaskList.TaskList.RemoveAt(n);
+                        _displayedDiaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
+                    }
                     UpdateMainList();
                 }
             }
@@ -84,6 +99,7 @@ namespace DiaryApp
         private void Mainform_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveLoad.SaveToFile(_diaryTaskList);
+            SaveLoad.SavePrefs(_diaryPrefeferences);
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
@@ -130,12 +146,12 @@ namespace DiaryApp
                     x.Name == _displayedDiaryTaskList.TaskList[TaskListBox.SelectedIndex].Name);
                 _diaryTaskList.TaskList.RemoveAt(index);
                 _displayedDiaryTaskList.TaskList.RemoveAt(TaskListBox.SelectedIndex);
-                //_displayedDiaryTaskList = _diaryTaskList;
-                UpdateMainList();
+                
             }
             catch (ArgumentOutOfRangeException)
             {
             }
+            UpdateMainList();
         }
 
         private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
@@ -172,22 +188,28 @@ namespace DiaryApp
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sp.Ring();
+            var aboutForm = new Aboutform();
+            aboutForm.ShowDialog();
         }
 
         private void PrefsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            var prefForm = new PrefForm(_diaryPrefeferences.AudioPath);
+            if (prefForm.ShowDialog() == DialogResult.OK)
+            {
+                _diaryPrefeferences = prefForm.DiaryPreferences;
+                sp = new DiarySoundPlayer(_diaryPrefeferences.AudioPath);
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Find_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Trim().Length != 0)
+            if (FindTextBox.Text.Trim().Length != 0)
             {
                 _displayedFindDiaryTaskList = new DiaryTaskList();
                 foreach (var item in _diaryTaskList.TaskList)
                 {
-                    if (item.Name.Contains(textBox1.Text.Trim()))
+                    if (item.Name.Contains(FindTextBox.Text.Trim()))
                     {
                         _displayedFindDiaryTaskList.TaskList.Add(item);
                     }
@@ -219,7 +241,7 @@ namespace DiaryApp
                     _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
                     _displayedFindDiaryTaskList.TaskList.RemoveAt(n);
                     _displayedFindDiaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
-                    button3_Click(sender,  e);
+                    Find_Click(sender,  e);
                     UpdateFindList();
                     _displayedDiaryTaskList = _diaryTaskList;
                     UpdateMainList();
@@ -227,9 +249,62 @@ namespace DiaryApp
             }
         }
 
-        private void notifyIcon1_Click(object sender, EventArgs e)
+        private void OpenNotify_Click(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            bool ring = false;
+            DiaryTask task = null;
+            for (int i = 0; i <= _diaryTaskList.TaskList.Count -1; i++)
+            {
+                if (_diaryTaskList.TaskList[i].Remind)
+                {
+                    if (CompareDate(_diaryTaskList.TaskList[i].ReminderDate, DateTime.Now, true))
+                    {
+                        ring = true;
+                        _diaryTaskList.TaskList[i] = new DiaryTask(_diaryTaskList.TaskList[i].Name, _diaryTaskList.TaskList[i].TaskDate,
+                            !_diaryTaskList.TaskList[i].Remind, _diaryTaskList.TaskList[i].FileName, _diaryTaskList.TaskList[i].ReminderDate.ToString());
+                        task = _diaryTaskList.TaskList[i];
+                    }
+                }
+            }
+            if (ring)
+            {
+                sp.Ring();
+                var dialogresult = MessageBox.Show(task.Name, "Выключить", MessageBoxButtons.OK);
+                if (dialogresult == DialogResult.OK)
+                {
+                    sp.Stop();
+                }
+            }
+        }
+
+        private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
+        private void FindTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (FindTextBox.TextLength >= 10 && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void FindTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Find_Click(sender, new EventArgs());
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

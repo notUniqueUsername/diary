@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aboutform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aboutform.Designer.cs">
+      <DependentUpon>Aboutform.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,8 +70,17 @@
     <Compile Include="CloseForm.designer.cs">
       <DependentUpon>CloseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrefForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrefForm.Designer.cs">
+      <DependentUpon>PrefForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Aboutform.resx">
+      <DependentUpon>Aboutform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CloseForm.resx">
       <DependentUpon>CloseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrefForm.resx">
+      <DependentUpon>PrefForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

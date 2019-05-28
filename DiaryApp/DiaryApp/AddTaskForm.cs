@@ -32,15 +32,15 @@ namespace DiaryApp
                     {
                         ChangeFileLabel(value.FileName);
                     }
-                    textBox1.Text = value.Name;
+                    NameTextBox.Text = value.Name;
                     TaskTimePicker.Value = value.TaskDate;
                     if (value.Remind)
                     {
-                        checkBox1.Checked = value.Remind;
+                        RemindCheckBox.Checked = value.Remind;
                         RemindTimePicker.Value = value.ReminderDate;
                     }
                     LockUnlock();
-                    pictureBox1.Visible = true;
+                    RedactPictureBox.Visible = true;
                 }
                 _diaryTask = value;
             }
@@ -52,37 +52,37 @@ namespace DiaryApp
             TaskTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
             RemindTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
             RemindTimePicker.Enabled = false;
-            pictureBox1.Visible = false;
+            RedactPictureBox.Visible = false;
         }
 
         private void ChangeFileLabel(string path)
         {
             _pathTOFile = path;
             var lastIndex = path.LastIndexOf(@"\");
-            label2.Text = path.Substring(lastIndex + 1);
-            label2.Click += FileLabel_Click;
-            label2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Underline, GraphicsUnit.Point, ((byte)(204)));
-            label2.Cursor = Cursors.Hand;
+            FileNameLabel.Text = path.Substring(lastIndex + 1);
+            FileNameLabel.Click += FileLabel_Click;
+            FileNameLabel.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Underline, GraphicsUnit.Point, ((byte)(204)));
+            FileNameLabel.Cursor = Cursors.Hand;
         }
 
         private void LockUnlock()
         {
 
-            if (textBox1.Enabled)
+            if (NameTextBox.Enabled)
             {
-                textBox1.Enabled = false;
-                button1.Enabled = false;
-                checkBox1.Enabled = false;
+                NameTextBox.Enabled = false;
+                AddfileButton.Enabled = false;
+                RemindCheckBox.Enabled = false;
                 TaskTimePicker.Enabled = false;
                 RemindTimePicker.Enabled = false;
             }
             else
             {
-                textBox1.Enabled = true;
-                button1.Enabled = true;
-                checkBox1.Enabled = true;
+                NameTextBox.Enabled = true;
+                AddfileButton.Enabled = true;
+                RemindCheckBox.Enabled = true;
                 TaskTimePicker.Enabled = true;
-                if (checkBox1.Checked)
+                if (RemindCheckBox.Checked)
                 {
                     RemindTimePicker.Enabled = true;
                 }
@@ -92,11 +92,11 @@ namespace DiaryApp
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (RemindCheckBox.Checked)
             {
                 RemindTimePicker.Enabled = true;
             }
-            else if (!checkBox1.Checked)
+            else if (!RemindCheckBox.Checked)
             {
                 RemindTimePicker.Enabled = false;
             }
@@ -112,13 +112,13 @@ namespace DiaryApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (RemindCheckBox.Checked)
             {
-                _diaryTask = new DiaryTask(textBox1.Text,TaskTimePicker.Value, checkBox1.Checked, openfileDialog1.FileName, RemindTimePicker.Value.ToString());
+                _diaryTask = new DiaryTask(NameTextBox.Text,TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName, RemindTimePicker.Value.ToString());
             }
-            if (!checkBox1.Checked)
+            if (!RemindCheckBox.Checked)
             {
-                _diaryTask = new DiaryTask(textBox1.Text, TaskTimePicker.Value, checkBox1.Checked, openfileDialog1.FileName);
+                _diaryTask = new DiaryTask(NameTextBox.Text, TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName);
             }
             DialogResult = DialogResult.OK;
             this.Close();
@@ -131,7 +131,25 @@ namespace DiaryApp
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             LockUnlock();
-            pictureBox1.Visible = false;
+            RedactPictureBox.Visible = false;
+        }
+
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (NameTextBox.TextLength >= 50)
+            {
+                var tooltip = new ToolTip();
+                tooltip.SetToolTip(this.NameTextBox, "Максимальная длина 50 символов");
+            }
+        }
+
+        private void NameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (NameTextBox.TextLength >= 50 && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

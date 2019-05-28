@@ -10,6 +10,45 @@ namespace DiaryAppLibs
 {
     public static class SaveLoad
     {
+        public static void SavePrefs(DiaryPrefeferences data, string filePath = "Standart")
+        {
+            if (filePath == "Standart")
+            {
+                filePath = Environment.CurrentDirectory.ToString() + @"\Preferences.diarypref";
+            }
+            using (StreamWriter file = File.CreateText(filePath))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, data);
+            }
+        }
+
+        public static DiaryPrefeferences LoadPrefs(string filePath = "Standart")
+        {
+            if (filePath == "Standart")
+            {
+                filePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"\Preferences.diarypref";
+            }
+            try
+            {
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (DiaryPrefeferences)serializer.Deserialize(file, typeof(DiaryPrefeferences));
+                }
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                var project = new DiaryPrefeferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3");
+                SaveLoad.SavePrefs(project, filePath);
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (DiaryPrefeferences)serializer.Deserialize(file, typeof(DiaryPrefeferences));
+                }
+            }
+        }
+
         /// <summary>
         /// Запись в фаил
         /// </summary>

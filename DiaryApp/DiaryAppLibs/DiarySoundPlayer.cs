@@ -28,7 +28,13 @@ namespace DiaryAppLibs
         }
         public void Stop()
         {
-            _outputDevice?.Stop();
+            if (!(waveOut == null))
+            {
+                waveOut.Stop();
+                waveOut.Dispose();
+                waveOut = null;
+            }
+
         }
         public void Ring()
         {
@@ -39,12 +45,6 @@ namespace DiaryAppLibs
                 waveOut = new WaveOut();
                 waveOut.Init(loop);
                 waveOut.Play();
-            }
-            else
-            {
-                waveOut.Stop();
-                waveOut.Dispose();
-                waveOut = null;
             }
         }
     }
