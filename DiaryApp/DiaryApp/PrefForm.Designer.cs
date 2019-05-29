@@ -75,11 +75,11 @@
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.Name = "PrefForm";
             this.ShowIcon = false;
-            this.Text = "PrefForm";
+            this.Text = "Настройки";
             this.ResumeLayout(false);
             this.PerformLayout();
 

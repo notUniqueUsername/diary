@@ -8,6 +8,9 @@ using NAudio.Wave.SampleProviders;
 
 namespace DiaryAppLibs
 {
+    /// <summary>
+    /// Класс для воспроизведения звука средствами библиотеки NAduio
+    /// </summary>
     public class DiarySoundPlayer
     {
         private WaveOutEvent _outputDevice;

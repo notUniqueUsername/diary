@@ -7,6 +7,9 @@ using NAudio.Wave;
 
 namespace DiaryAppLibs
 {
+    /// <summary>
+    /// Класс зацикливающий воспроизводимый аудиофайл
+    /// </summary>
     public class LoopAudio : WaveStream
     {
         WaveStream sourceStream;

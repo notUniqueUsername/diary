@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DiaryAppLibs
 {
+    /// <summary>
+    /// Класс хранящий настройки приложения
+    /// </summary>
     public class DiaryPrefeferences
     {
         private string _audioPath;

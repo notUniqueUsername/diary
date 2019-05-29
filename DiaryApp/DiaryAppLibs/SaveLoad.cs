@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace DiaryAppLibs
 {
+    /// <summary>
+    /// Класс для сохранения и загрузки данных необходимы для работы приложения
+    /// </summary>
     public static class SaveLoad
     {
         public static void SavePrefs(DiaryPrefeferences data, string filePath = "Standart")

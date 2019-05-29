@@ -8,31 +8,40 @@ using Newtonsoft.Json;
 
 namespace DiaryAppLibs
 {
+    /// <summary>
+    /// Класс содержащий логику и структуру задачи
+    /// </summary>
     public class DiaryTask
     {
+        /// <summary>
+        /// Поле содержащее данные о прикреплении файла
+        /// </summary>
         private bool _file;
+        /// <summary>
+        /// Дата напомнинаия
+        /// </summary>
         private DateTime _reminderDate;
+        /// <summary>
+        /// Дата задачи
+        /// </summary>
         private DateTime _taskDate;
+        /// <summary>
+        /// Название задачи
+        /// </summary>
         private string _name;
+        /// <summary>
+        /// Полное имя файла
+        /// </summary>
         private string _filename;
-        /*public string Audio
-        {
-            private set
-            {
-                if (!File.Exists(value))
-                {
-                    throw new ArgumentException("Фаил не сущесвует");
-                }
-                _audio = value;
-            }
-            get
-            {
-                return _audio;
-            }
-        }*/
 
+        /// <summary>
+        /// Свойство управляет напоминанием
+        /// </summary>
         public bool Remind { get; private set; }
 
+        /// <summary>
+        /// Свойство для доступа к имени файла
+        /// </summary>
         public string FileName
         {
             private set
@@ -57,6 +66,9 @@ namespace DiaryAppLibs
             }
         }
 
+        /// <summary>
+        /// Свойство для доступа к названию задачи
+        /// </summary>
         public string Name
         {
             private set
@@ -73,6 +85,9 @@ namespace DiaryAppLibs
             }
         }
 
+        /// <summary>
+        /// Свойство для доступа к дате задачи
+        /// </summary>
         public DateTime TaskDate
         {
             private set
@@ -87,6 +102,10 @@ namespace DiaryAppLibs
                 return _taskDate;
             }
         }
+
+        /// <summary>
+        /// Свойство для доступа к дате напоминания
+        /// </summary>
         [JsonProperty]
         public DateTime ReminderDate
         {
@@ -118,6 +137,14 @@ namespace DiaryAppLibs
             }
         }
 
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
+        /// <param name="name">название задачи</param>
+        /// <param name="taskDate">дата задачи</param>
+        /// <param name="remind">необходимо ли напоминать</param>
+        /// <param name="filename">полный путь до файла</param>
+        /// <param name="reminderDate">дата напоминания</param>
         [JsonConstructor]
         public DiaryTask(string name, DateTime taskDate, bool remind, string filename = "", string reminderDate = "01.01.0001 0:00:00")
         {
@@ -138,6 +165,9 @@ namespace DiaryAppLibs
             CheckFile();
         }
 
+        /// <summary>
+        /// Проверка прикрепления файла
+        /// </summary>
         private void CheckFile()
         {
             if (FileName == "")
