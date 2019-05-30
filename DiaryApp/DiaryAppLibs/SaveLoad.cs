@@ -13,7 +13,7 @@ namespace DiaryAppLibs
     /// </summary>
     public static class SaveLoad
     {
-        public static void SavePrefs(DiaryPrefeferences data, string filePath = "Standart")
+        public static void SavePrefs(DiaryPreferences data, string filePath = "Standart")
         {
             if (filePath == "Standart")
             {
@@ -26,7 +26,7 @@ namespace DiaryAppLibs
             }
         }
 
-        public static DiaryPrefeferences LoadPrefs(string filePath = "Standart")
+        public static DiaryPreferences LoadPrefs(string filePath = "Standart")
         {
             if (filePath == "Standart")
             {
@@ -37,17 +37,17 @@ namespace DiaryAppLibs
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryPrefeferences)serializer.Deserialize(file, typeof(DiaryPrefeferences));
+                    return (DiaryPreferences)serializer.Deserialize(file, typeof(DiaryPreferences));
                 }
             }
             catch (System.IO.FileNotFoundException)
             {
-                var project = new DiaryPrefeferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3");
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3");
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryPrefeferences)serializer.Deserialize(file, typeof(DiaryPrefeferences));
+                    return (DiaryPreferences)serializer.Deserialize(file, typeof(DiaryPreferences));
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace DiaryAppLibs
     /// <summary>
     /// Класс хранящий настройки приложения
     /// </summary>
-    public class DiaryPrefeferences
+    public class DiaryPreferences
     {
         private string _audioPath;
         [JsonProperty]
@@ -37,7 +37,7 @@ namespace DiaryAppLibs
             }
         }
         [JsonConstructor]
-        public DiaryPrefeferences(string path)
+        public DiaryPreferences(string path)
         {
             AudioPath = path;
         }

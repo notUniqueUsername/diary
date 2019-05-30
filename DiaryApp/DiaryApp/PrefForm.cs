@@ -14,7 +14,7 @@ namespace DiaryApp
     public partial class PrefForm : Form
     {
         private string _pathTOFile;
-        public DiaryPrefeferences DiaryPreferences { private set; get; } = new DiaryPrefeferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3");
+        public DiaryPreferences DiaryPreferences { private set; get; } = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3");
         private OpenFileDialog openFileDialog = new OpenFileDialog();
         public PrefForm(string pathTOAdudio)
         {
@@ -26,7 +26,7 @@ namespace DiaryApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DiaryPreferences = new DiaryPrefeferences(_pathTOFile);
+            DiaryPreferences = new DiaryPreferences(_pathTOFile);
             DialogResult = DialogResult.OK;
         }
 

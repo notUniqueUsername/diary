@@ -23,7 +23,7 @@ namespace DiaryApp
             _displayedDiaryTaskList = _diaryTaskList;
             UpdateMainList();
         }
-        private DiaryPrefeferences _diaryPrefeferences;
+        private DiaryPreferences _diaryPrefeferences;
         private DiarySoundPlayer sp;
         private DiaryTaskList _diaryTaskList;
         private DiaryTaskList _displayedDiaryTaskList;

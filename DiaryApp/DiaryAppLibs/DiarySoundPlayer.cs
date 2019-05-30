@@ -16,7 +16,7 @@ namespace DiaryAppLibs
         private WaveOutEvent _outputDevice;
         private AudioFileReader _audioFile;
         private string _pathToAudio;
-        private WaveOut waveOut;
+        private WaveOut _waveOut;
         public DiarySoundPlayer(string pathToAudio)
         {
             _outputDevice = new WaveOutEvent();
@@ -31,23 +31,23 @@ namespace DiaryAppLibs
         }
         public void Stop()
         {
-            if (!(waveOut == null))
+            if (!(_waveOut == null))
             {
-                waveOut.Stop();
-                waveOut.Dispose();
-                waveOut = null;
+                _waveOut.Stop();
+                _waveOut.Dispose();
+                _waveOut = null;
             }
 
         }
         public void Ring()
         {
-            if (waveOut == null)
+            if (_waveOut == null)
             {
                 AudioFileReader reader = new AudioFileReader(_pathToAudio);
                 LoopAudio loop = new LoopAudio(reader);
-                waveOut = new WaveOut();
-                waveOut.Init(loop);
-                waveOut.Play();
+                _waveOut = new WaveOut();
+                _waveOut.Init(loop);
+                _waveOut.Play();
             }
         }
     }
