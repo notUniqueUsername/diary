@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace DiaryAppLibs
@@ -33,24 +34,39 @@ namespace DiaryAppLibs
             {
                 filePath = Environment.CurrentDirectory.ToString() + @"\Preferences.diarypref";
             }
+
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryPreferences)serializer.Deserialize(file, typeof(DiaryPreferences));
+                    return (DiaryPreferences) serializer.Deserialize(file, typeof(DiaryPreferences));
                 }
             }
             catch (System.IO.FileNotFoundException)
             {
                 var fontColor = Color.Black;
                 var color = Color.LightSalmon;
-                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",fontColor,color);
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",
+                    fontColor, color);
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryPreferences)serializer.Deserialize(file, typeof(DiaryPreferences));
+                    return (DiaryPreferences) serializer.Deserialize(file, typeof(DiaryPreferences));
+                }
+            }
+            catch (Newtonsoft.Json.JsonSerializationException)
+            {
+                var fontColor = Color.Black;
+                var color = Color.LightSalmon;
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",
+                    fontColor, color);
+                SaveLoad.SavePrefs(project, filePath);
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (DiaryPreferences) serializer.Deserialize(file, typeof(DiaryPreferences));
                 }
             }
         }
@@ -86,15 +102,26 @@ namespace DiaryAppLibs
             {
                 filePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + @"Diary.diary";
             }
+
             try
             {
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryTaskList)serializer.Deserialize(file, typeof(DiaryTaskList));
+                    return (DiaryTaskList) serializer.Deserialize(file, typeof(DiaryTaskList));
                 }
             }
             catch (System.IO.FileNotFoundException)
+            {
+                var project = new DiaryTaskList();
+                SaveLoad.SaveToFile(project, filePath);
+                using (StreamReader file = File.OpenText(filePath))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    return (DiaryTaskList) serializer.Deserialize(file, typeof(DiaryTaskList));
+                }
+            }
+            catch (ArgumentException)
             {
                 var project = new DiaryTaskList();
                 SaveLoad.SaveToFile(project, filePath);

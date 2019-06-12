@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using  Newtonsoft.Json;
 using DiaryAppLibs;
 
 namespace DiaryApp
@@ -17,18 +18,29 @@ namespace DiaryApp
         {
             InitializeComponent();
             TimerForRemind.Interval = 1000;
-            _diaryPrefeferences = SaveLoad.LoadPrefs();
-            sp = new DiarySoundPlayer(_diaryPrefeferences.AudioPath);
+            _diaryPreferences = SaveLoad.LoadPrefs();
+            sp = new DiarySoundPlayer(_diaryPreferences.AudioPath);
             _diaryTaskList = SaveLoad.LoadFromFile();
             _displayedDiaryTaskList = _diaryTaskList;
             UpdateMainList();
-            ChangeColorAndFontColor(_diaryPrefeferences);
+            ChangeColorAndFontColor(_diaryPreferences);
+            if (_diaryTaskList.TaskList.Count == 0)
+            {
+                Hello();   
+            }
         }
-        private DiaryPreferences _diaryPrefeferences;
+        private DiaryPreferences _diaryPreferences;
         private DiarySoundPlayer sp;
         private DiaryTaskList _diaryTaskList;
         private DiaryTaskList _displayedDiaryTaskList;
         private DiaryTaskList _displayedFindDiaryTaskList;
+
+        private void Hello()
+        {
+            MessageBox.Show(
+                "Если вы видите это сообщение значит время напомнить что прикрепленные к заметкам файлы, а также звуковой файл выбранный для звукового оповещения нельзя перемещать или удалять"
+                , "Произошел первый запуск или ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         /// <summary>
         /// Изменение цвета шрифта и фона.
@@ -72,7 +84,7 @@ namespace DiaryApp
 
         private void Add_Click(object sender, EventArgs e)
         {
-            var addTaskForm = new AddTaskForm(_diaryPrefeferences);
+            var addTaskForm = new AddTaskForm(_diaryPreferences);
             if (addTaskForm.ShowDialog()== DialogResult.OK)
             {
                 _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
@@ -88,7 +100,7 @@ namespace DiaryApp
             if (n != ListBox.NoMatches)
             {
                 TaskListBox.SelectedIndex = n;
-                var addTaskForm = new AddTaskForm(_diaryPrefeferences);
+                var addTaskForm = new AddTaskForm(_diaryPreferences);
                 addTaskForm.DiaryTask = _displayedDiaryTaskList.TaskList[n];
                 var changedTask = _displayedDiaryTaskList.TaskList[n];
                 if (addTaskForm.ShowDialog() == DialogResult.OK)
@@ -116,11 +128,11 @@ namespace DiaryApp
         private void Mainform_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveLoad.SaveToFile(_diaryTaskList);
-            SaveLoad.SavePrefs(_diaryPrefeferences);
+            SaveLoad.SavePrefs(_diaryPreferences);
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                var closeForm = new CloseForm(_diaryPrefeferences);
+                var closeForm = new CloseForm(_diaryPreferences);
                 if (closeForm.ShowDialog() == DialogResult.OK)
                 {
                     if (closeForm.MinimizeORExit)
@@ -205,18 +217,18 @@ namespace DiaryApp
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var aboutForm = new Aboutform(_diaryPrefeferences);
+            var aboutForm = new Aboutform(_diaryPreferences);
             aboutForm.ShowDialog();
         }
 
         private void PrefsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var prefForm = new PrefForm(_diaryPrefeferences.AudioPath,_diaryPrefeferences.FontColor,_diaryPrefeferences.Color);
+            var prefForm = new PrefForm(_diaryPreferences.AudioPath,_diaryPreferences.FontColor,_diaryPreferences.Color);
             if (prefForm.ShowDialog() == DialogResult.OK)
             {
-                _diaryPrefeferences = prefForm.DiaryPreferences;
-                sp = new DiarySoundPlayer(_diaryPrefeferences.AudioPath);
-                ChangeColorAndFontColor(_diaryPrefeferences);
+                _diaryPreferences = prefForm.DiaryPreferences;
+                sp = new DiarySoundPlayer(_diaryPreferences.AudioPath);
+                ChangeColorAndFontColor(_diaryPreferences);
             }
         }
 
@@ -248,7 +260,7 @@ namespace DiaryApp
             if (n != ListBox.NoMatches)
             {
                 FindListBox.SelectedIndex = n;
-                var addTaskForm = new AddTaskForm(_diaryPrefeferences);
+                var addTaskForm = new AddTaskForm(_diaryPreferences);
                 addTaskForm.DiaryTask = _displayedFindDiaryTaskList.TaskList[n];
                 var changedTask = _displayedFindDiaryTaskList.TaskList[n];
                 if (addTaskForm.ShowDialog() == DialogResult.OK)
