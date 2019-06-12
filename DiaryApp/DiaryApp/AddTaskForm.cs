@@ -123,16 +123,23 @@ namespace DiaryApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (RemindCheckBox.Checked)
+            try
             {
-                _diaryTask = new DiaryTask(NameTextBox.Text,TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName, RemindTimePicker.Value.ToString());
+                if (RemindCheckBox.Checked)
+                {
+                    _diaryTask = new DiaryTask(NameTextBox.Text, TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName, RemindTimePicker.Value.ToString());
+                }
+                if (!RemindCheckBox.Checked)
+                {
+                    _diaryTask = new DiaryTask(NameTextBox.Text, TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName);
+                }
+                DialogResult = DialogResult.OK;
+                this.Close();
             }
-            if (!RemindCheckBox.Checked)
+            catch (ArgumentException exception)
             {
-                _diaryTask = new DiaryTask(NameTextBox.Text, TaskTimePicker.Value, RemindCheckBox.Checked, openfileDialog1.FileName);
+                MessageBox.Show(exception.Message, "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            DialogResult = DialogResult.OK;
-            this.Close();
         }
         private void FileLabel_Click(object sender, EventArgs e)
         {

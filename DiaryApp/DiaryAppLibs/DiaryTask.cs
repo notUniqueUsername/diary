@@ -73,7 +73,7 @@ namespace DiaryAppLibs
         {
             private set
             {
-                if (value.Trim().Length >= 50)
+                if (value.Trim().Length > 50)
                 {
                     throw new ArgumentException("В названии более 50 символов");
                 }

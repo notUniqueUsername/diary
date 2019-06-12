@@ -16,14 +16,23 @@ namespace DiaryApp
         private Color _color;
         private Color _fontColor;
         private string _pathTOFile;
-        public DiaryPreferences DiaryPreferences { private set; get; } = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3"
-            , Color.Black
-            , Color.LightSalmon);
+        public DiaryPreferences DiaryPreferences { private set; get; }
         private OpenFileDialog openFileDialog = new OpenFileDialog();
 
         public PrefForm(string pathTOAdudio, Color fontColor, Color color)
         {
             InitializeComponent();
+            try
+            {
+                DiaryPreferences = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3"
+                    , Color.Black
+                    , Color.LightSalmon);
+            }
+            catch (ArgumentException exception)
+            {
+                MessageBox.Show(exception.Message, "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
 
             fontDialog.ShowColor = true;
             colorDialog.FullOpen = true;
@@ -45,8 +54,15 @@ namespace DiaryApp
 
         private void Accept_Click(object sender, EventArgs e)
         {
-            DiaryPreferences = new DiaryPreferences(_pathTOFile,_fontColor,_color);
-            DialogResult = DialogResult.OK;
+            try
+            {
+                DiaryPreferences = new DiaryPreferences(_pathTOFile, _fontColor, _color);
+                DialogResult = DialogResult.OK;
+            }
+            catch (ArgumentException exception)
+            {
+                MessageBox.Show(exception.Message, "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void ChangeFileLabel(string path)
