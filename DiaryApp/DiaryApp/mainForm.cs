@@ -22,12 +22,29 @@ namespace DiaryApp
             _diaryTaskList = SaveLoad.LoadFromFile();
             _displayedDiaryTaskList = _diaryTaskList;
             UpdateMainList();
+            ChangeColorAndFontColor(_diaryPrefeferences);
         }
         private DiaryPreferences _diaryPrefeferences;
         private DiarySoundPlayer sp;
         private DiaryTaskList _diaryTaskList;
         private DiaryTaskList _displayedDiaryTaskList;
         private DiaryTaskList _displayedFindDiaryTaskList;
+
+        /// <summary>
+        /// Изменение цвета шрифта и фона.
+        /// </summary>
+        /// <param name="diaryPreferences"></param>
+        private void ChangeColorAndFontColor(DiaryPreferences diaryPreferences)
+        {
+            this.BackColor = diaryPreferences.Color;
+            this.ForeColor = diaryPreferences.FontColor;
+            DiaryMainMenuStrip.BackColor = diaryPreferences.Color;
+            DiaryMainMenuStrip.ForeColor = diaryPreferences.FontColor;
+            FindListBox.BackColor = diaryPreferences.Color;
+            FindListBox.ForeColor = diaryPreferences.FontColor;
+            TaskListBox.BackColor = diaryPreferences.Color;
+            TaskListBox.ForeColor = diaryPreferences.FontColor;
+        }
 
         private void UpdateMainList()
         {
@@ -55,7 +72,7 @@ namespace DiaryApp
 
         private void Add_Click(object sender, EventArgs e)
         {
-            var addTaskForm = new AddTaskForm();
+            var addTaskForm = new AddTaskForm(_diaryPrefeferences);
             if (addTaskForm.ShowDialog()== DialogResult.OK)
             {
                 _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
@@ -71,7 +88,7 @@ namespace DiaryApp
             if (n != ListBox.NoMatches)
             {
                 TaskListBox.SelectedIndex = n;
-                var addTaskForm = new AddTaskForm();
+                var addTaskForm = new AddTaskForm(_diaryPrefeferences);
                 addTaskForm.DiaryTask = _displayedDiaryTaskList.TaskList[n];
                 var changedTask = _displayedDiaryTaskList.TaskList[n];
                 if (addTaskForm.ShowDialog() == DialogResult.OK)
@@ -103,7 +120,7 @@ namespace DiaryApp
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                var closeForm = new CloseForm();
+                var closeForm = new CloseForm(_diaryPrefeferences);
                 if (closeForm.ShowDialog() == DialogResult.OK)
                 {
                     if (closeForm.MinimizeORExit)
@@ -188,17 +205,18 @@ namespace DiaryApp
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var aboutForm = new Aboutform();
+            var aboutForm = new Aboutform(_diaryPrefeferences);
             aboutForm.ShowDialog();
         }
 
         private void PrefsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var prefForm = new PrefForm(_diaryPrefeferences.AudioPath);
+            var prefForm = new PrefForm(_diaryPrefeferences.AudioPath,_diaryPrefeferences.FontColor,_diaryPrefeferences.Color);
             if (prefForm.ShowDialog() == DialogResult.OK)
             {
                 _diaryPrefeferences = prefForm.DiaryPreferences;
                 sp = new DiarySoundPlayer(_diaryPrefeferences.AudioPath);
+                ChangeColorAndFontColor(_diaryPrefeferences);
             }
         }
 
@@ -230,7 +248,7 @@ namespace DiaryApp
             if (n != ListBox.NoMatches)
             {
                 FindListBox.SelectedIndex = n;
-                var addTaskForm = new AddTaskForm();
+                var addTaskForm = new AddTaskForm(_diaryPrefeferences);
                 addTaskForm.DiaryTask = _displayedFindDiaryTaskList.TaskList[n];
                 var changedTask = _displayedFindDiaryTaskList.TaskList[n];
                 if (addTaskForm.ShowDialog() == DialogResult.OK)

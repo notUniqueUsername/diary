@@ -7,14 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DiaryAppLibs;
 
 namespace DiaryApp
 {
     public partial class CloseForm : Form
     {
-        public CloseForm()
+        public CloseForm(DiaryPreferences diaryPreferences)
         {
             InitializeComponent();
+            ChangeColor(diaryPreferences);
+        }
+
+        private void ChangeColor(DiaryPreferences diaryPreferences)
+        {
+            this.BackColor = diaryPreferences.Color;
+            this.ForeColor = diaryPreferences.FontColor;
         }
 
         public bool MinimizeORExit { private set; get; }

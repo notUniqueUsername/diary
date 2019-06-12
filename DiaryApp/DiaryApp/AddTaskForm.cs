@@ -46,13 +46,24 @@ namespace DiaryApp
             }
         }
 
-        public AddTaskForm()
+        public AddTaskForm(DiaryPreferences diaryPreferences)
         {
             InitializeComponent();
             TaskTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
             RemindTimePicker.CustomFormat = "dd.MM.yyyy - HH:mm";
             RemindTimePicker.Enabled = false;
             RedactPictureBox.Visible = false;
+            ChangeColor(diaryPreferences);
+        }
+
+        private void ChangeColor(DiaryPreferences diaryPreferences)
+        {
+            this.BackColor = diaryPreferences.Color;
+            this.ForeColor = diaryPreferences.FontColor;
+            RemindCheckBox.BackColor = diaryPreferences.Color;
+            RemindCheckBox.ForeColor = diaryPreferences.FontColor;
+            NameTextBox.ForeColor = diaryPreferences.FontColor;
+            NameTextBox.BackColor = Color.DarkTurquoise;
         }
 
         private void ChangeFileLabel(string path)

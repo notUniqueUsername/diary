@@ -88,7 +88,7 @@
             // 
             // FindTextBox
             // 
-            this.FindTextBox.BackColor = System.Drawing.Color.DarkCyan;
+            this.FindTextBox.BackColor = System.Drawing.Color.White;
             this.FindTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FindTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FindTextBox.Location = new System.Drawing.Point(168, 31);
@@ -149,7 +149,7 @@
             this.TaskListBox.ItemHeight = 24;
             this.TaskListBox.Location = new System.Drawing.Point(2, 197);
             this.TaskListBox.Name = "TaskListBox";
-            this.TaskListBox.Size = new System.Drawing.Size(341, 216);
+            this.TaskListBox.Size = new System.Drawing.Size(336, 216);
             this.TaskListBox.TabIndex = 7;
             this.TaskListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TaskListBox_MouseUp);
             // 
@@ -161,9 +161,9 @@
             this.FindListBox.FormattingEnabled = true;
             this.FindListBox.HorizontalScrollbar = true;
             this.FindListBox.ItemHeight = 24;
-            this.FindListBox.Location = new System.Drawing.Point(168, 50);
+            this.FindListBox.Location = new System.Drawing.Point(168, 73);
             this.FindListBox.Name = "FindListBox";
-            this.FindListBox.Size = new System.Drawing.Size(170, 144);
+            this.FindListBox.Size = new System.Drawing.Size(170, 120);
             this.FindListBox.TabIndex = 8;
             this.FindListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FindListBox_MouseDoubleClick);
             // 
@@ -222,11 +222,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSalmon;
             this.ClientSize = new System.Drawing.Size(343, 454);
+            this.Controls.Add(this.FindTextBox);
             this.Controls.Add(this.ShowAllButton);
             this.Controls.Add(this.FindListBox);
             this.Controls.Add(this.TaskListBox);
             this.Controls.Add(this.FindButton);
-            this.Controls.Add(this.FindTextBox);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.AddButton);

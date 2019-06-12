@@ -153,11 +153,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSalmon;
             this.ClientSize = new System.Drawing.Size(344, 169);
-            this.Controls.Add(this.RedactPictureBox);
-            this.Controls.Add(this.ConfirmButton);
-            this.Controls.Add(this.FileNameLabel);
-            this.Controls.Add(this.AddfileButton);
             this.Controls.Add(this.RemindCheckBox);
+            this.Controls.Add(this.AddfileButton);
+            this.Controls.Add(this.ConfirmButton);
+            this.Controls.Add(this.RedactPictureBox);
+            this.Controls.Add(this.FileNameLabel);
             this.Controls.Add(this.TaskLabel);
             this.Controls.Add(this.TaskTimePicker);
             this.Controls.Add(this.RemindTimePicker);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,7 +43,9 @@ namespace DiaryAppLibs
             }
             catch (System.IO.FileNotFoundException)
             {
-                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3");
+                var fontColor = Color.Black;
+                var color = Color.LightSalmon;
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",fontColor,color);
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
