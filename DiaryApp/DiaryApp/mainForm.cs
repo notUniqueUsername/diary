@@ -282,10 +282,18 @@ namespace DiaryApp
                 {
                     if (CompareDate(_diaryTaskList.TaskList[i].ReminderDate, DateTime.Now, true))
                     {
-                        ring = true;
-                        _diaryTaskList.TaskList[i] = new DiaryTask(_diaryTaskList.TaskList[i].Name, _diaryTaskList.TaskList[i].TaskDate,
-                            !_diaryTaskList.TaskList[i].Remind, _diaryTaskList.TaskList[i].FileName, _diaryTaskList.TaskList[i].ReminderDate.ToString());
-                        task = _diaryTaskList.TaskList[i];
+                        try
+                        {
+                            ring = true;
+                            _diaryTaskList.TaskList[i] = new DiaryTask(_diaryTaskList.TaskList[i].Name, _diaryTaskList.TaskList[i].TaskDate,
+                                !_diaryTaskList.TaskList[i].Remind, _diaryTaskList.TaskList[i].FileName, _diaryTaskList.TaskList[i].ReminderDate.ToString());
+                            task = _diaryTaskList.TaskList[i];
+                        }
+                        catch (ArgumentException exception)
+                        {
+                            MessageBox.Show(exception.Message, "Что-то пошло не так", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        
                     }
                 }
             }
