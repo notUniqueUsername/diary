@@ -24,7 +24,7 @@ namespace DiaryApp
             InitializeComponent();
             try
             {
-                DiaryPreferences = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3"
+                DiaryPreferences = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3"
                     , Color.Black
                     , Color.LightSalmon);
             }

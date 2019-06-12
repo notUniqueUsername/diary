@@ -50,7 +50,7 @@ namespace DiaryAppLibs
                 {
                     if (!File.Exists(value))
                     {
-                        throw new ArgumentException("Фаил не сущесвует");
+                        throw new ArgumentException("Фаил не существует");
                     }
                     _filename = value;
                 }
@@ -111,10 +111,13 @@ namespace DiaryAppLibs
         {
             private set
             {
-                if (_taskDate.Year < value.Year && _taskDate.Month < value.Month && _taskDate.Hour < value.Hour && _taskDate.Day < value.Day && _taskDate.Minute < value.Minute )
+                var minuteInValue = new DateTime(value.Ticks -value.Ticks % TimeSpan.TicksPerSecond);
+                var minuteInTaskDate = new DateTime(_taskDate.Ticks - _taskDate.Ticks % TimeSpan.TicksPerSecond);
+                if (minuteInTaskDate < minuteInValue)
                 {
                     throw new ArgumentException("Дата напоминания не может быть позже даты окончания задачи");
                 }
+
                 if (value < new DateTime(1901, 1, 1))
                 {
                     if (value.ToString() != "01.01.0001 0:00:00")
@@ -123,11 +126,8 @@ namespace DiaryAppLibs
                     }
                     
                 }
-                    
-                if (value.Year < DateTime.Now.Year && value.Month < DateTime.Now.Month && value.Day < DateTime.Now.Day && value.Hour < DateTime.Now.Hour && value.Minute < DateTime.Now.Minute)
-                {
-                    throw new ArgumentException("дата напоминания не может быть раньше чем сейчас");
-                }
+
+
                     
                 _reminderDate = value;
             }
