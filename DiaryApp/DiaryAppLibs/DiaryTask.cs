@@ -52,7 +52,14 @@ namespace DiaryAppLibs
                     {
                         throw new ArgumentException("Фаил не существует");
                     }
-                    _filename = value;
+                    var lastIndex = value.LastIndexOf(@"\");
+                    var filename = value.Substring(lastIndex + 1);
+                    var filepath = Environment.CurrentDirectory.ToString() + @"\" + filename;
+                    if (!File.Exists(filepath))
+                    {
+                        File.Copy(value, filepath);
+                    }
+                    _filename = filepath;
                 }
                 else
                 {

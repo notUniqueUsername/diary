@@ -17,7 +17,7 @@ namespace DiaryUnitTests
         [SetUp]
         public void Setup()
         {
-            _diaryPreferences = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\diary\diary\DiaryApp\DiaryAppUnitTests" + @"\-click-nice_1.mp3"
+            _diaryPreferences = new DiaryPreferences(@"C:\Users\Valeriy\Desktop\diary\diary\DiaryApp\DiaryAppUnitTests" + @"\Ring.mp3"
                 , Color.Green
                 , Color.LightSalmon);
             string name = "";
@@ -89,7 +89,7 @@ namespace DiaryUnitTests
             }
 
             var ppath = Environment.CurrentDirectory.ToString();
-            File.Copy(@"C:\Users\Valeriy\Desktop\-click-nice_1.mp3", ppath+ @"\-click-nice_1.mp3");
+            //File.Copy(@"C:\Users\Valeriy\Desktop\Ring.mp3", ppath+ @"\Ring.mp3");
             var testedPrefs = SaveLoad.LoadPrefs(path);
             Assert.AreEqual(Color.Black, testedPrefs.FontColor);
         }

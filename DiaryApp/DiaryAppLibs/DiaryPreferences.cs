@@ -49,7 +49,14 @@ namespace DiaryAppLibs
                         var extension = value.Substring(valueLength - 3);
                         if (extension == "wav" || extension == "mp3")
                         {
-                            _audioPath = value;
+                            var lastIndex = value.LastIndexOf(@"\");
+                            var filename = value.Substring(lastIndex + 1);
+                            var filepath = Environment.CurrentDirectory.ToString() + @"\" + filename;
+                            if (!File.Exists(filepath))
+                            {
+                                File.Copy(value, filepath);
+                            }
+                            _audioPath = filepath;
                         }
                         else
                         {

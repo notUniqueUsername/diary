@@ -17,7 +17,7 @@ namespace DiaryUnitTests
         [SetUp]
         public void Setup()
         {
-            _path = @"C:\Users\Valeriy\Desktop\diary\diary\DiaryApp\DiaryAppUnitTests" + @"\-click-nice_1.mp3";
+            _path = @"C:\Users\Valeriy\Desktop\diary\diary\DiaryApp\DiaryAppUnitTests" + @"\Ring.mp3";
             _fontColor = Color.Green;
             _color = Color.LightSalmon;
         }
@@ -30,7 +30,7 @@ namespace DiaryUnitTests
             DiaryPreferences diaryPreferences = new DiaryPreferences(_path, _fontColor, _color);
             Assert.AreEqual(_color, diaryPreferences.Color);
             Assert.AreEqual(_fontColor,diaryPreferences.FontColor);
-            Assert.AreEqual(_path, diaryPreferences.AudioPath);
+            Assert.AreEqual(Environment.CurrentDirectory.ToString()+ @"\Ring.mp3", diaryPreferences.AudioPath);
         }
 
         [Test]

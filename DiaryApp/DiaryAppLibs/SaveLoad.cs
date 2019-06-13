@@ -47,7 +47,7 @@ namespace DiaryAppLibs
             {
                 var fontColor = Color.Black;
                 var color = Color.LightSalmon;
-                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\Ring.mp3",
                     fontColor, color);
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
@@ -60,7 +60,7 @@ namespace DiaryAppLibs
             {
                 var fontColor = Color.Black;
                 var color = Color.LightSalmon;
-                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3",
+                var project = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\Ring.mp3",
                     fontColor, color);
                 SaveLoad.SavePrefs(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))

@@ -101,7 +101,7 @@ namespace DiaryApp
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (RemindCheckBox.Checked)
             {
@@ -113,7 +113,7 @@ namespace DiaryApp
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             if (openfileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -121,7 +121,7 @@ namespace DiaryApp
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace DiaryApp
             Process.Start(_pathTOFile);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PictureBox1_Click(object sender, EventArgs e)
         {
             LockUnlock();
             RedactPictureBox.Visible = false;

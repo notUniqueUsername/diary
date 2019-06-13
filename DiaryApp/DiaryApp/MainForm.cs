@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,8 +39,34 @@ namespace DiaryApp
         private void Hello()
         {
             MessageBox.Show(
-                "Если вы видите это сообщение значит время напомнить что прикрепленные к заметкам файлы, а также звуковой файл выбранный для звукового оповещения нельзя перемещать или удалять"
+                "Если вы видите это сообщение значит время напомнить что прикрепленные к заметкам файлы," +
+                " а также звуковой файл выбранный для звукового оповещения нельзя перемещать или удалять из папки приложения"
                 , "Произошел первый запуск или ошибка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        /// <summary>
+        /// Удалаяет из осовного списка и проверяет надо ли удалять прикрепленный файл.
+        /// </summary>
+        /// <param name="index"></param>
+        private void RemoveDiaryTask(int index)
+        {
+            int needDeleteFile = 0;
+            if (_diaryTaskList.TaskList[index].FileName != "")
+            {
+                foreach (var Task in _diaryTaskList.TaskList)
+                {
+                    if (Task.FileName == _diaryTaskList.TaskList[index].FileName)
+                    {
+                        needDeleteFile++;
+                    }
+                }
+            }
+
+
+            if (needDeleteFile == 1)
+            {
+                File.Delete(_diaryTaskList.TaskList[index].FileName);
+            }
+            _diaryTaskList.TaskList.RemoveAt(index);
         }
 
         /// <summary>
@@ -57,7 +84,9 @@ namespace DiaryApp
             TaskListBox.BackColor = diaryPreferences.Color;
             TaskListBox.ForeColor = diaryPreferences.FontColor;
         }
-
+        /// <summary>
+        /// Обновляет основной лист
+        /// </summary>
         private void UpdateMainList()
         {
             var list = new List<string>();
@@ -72,6 +101,9 @@ namespace DiaryApp
             TaskListBox.DataSource = list;
         }
 
+        /// <summary>
+        /// Обновялет лист с результатми поиска.
+        /// </summary>
         private void UpdateFindList()
         {
             var list = new List<string>();
@@ -93,7 +125,11 @@ namespace DiaryApp
             }
             
         }
-
+        /// <summary>
+        /// Обработка дабл клика на основном листе.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TaskListBox_MouseUp(object sender, MouseEventArgs e)
         {
             int n = TaskListBox.IndexFromPoint(e.Location);
@@ -109,13 +145,15 @@ namespace DiaryApp
                     x.Name == changedTask.Name);
                     if (_diaryTaskList.TaskList == _displayedDiaryTaskList.TaskList)
                     {
-                        _diaryTaskList.TaskList.RemoveAt(index);
+                        RemoveDiaryTask(index);
+                        //_diaryTaskList.TaskList.RemoveAt(index);
                         _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
                         _displayedDiaryTaskList = _diaryTaskList;
                     }
                     else
                     {
-                        _diaryTaskList.TaskList.RemoveAt(index);
+                        RemoveDiaryTask(index);
+                        //_diaryTaskList.TaskList.RemoveAt(index);
                         _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
                         _displayedDiaryTaskList.TaskList.RemoveAt(n);
                         _displayedDiaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
@@ -124,7 +162,11 @@ namespace DiaryApp
                 }
             }
         }
-
+        /// <summary>
+        /// Обработка закрытия.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Mainform_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveLoad.SaveToFile(_diaryTaskList);
@@ -150,17 +192,29 @@ namespace DiaryApp
                 e.Cancel = false;
             }
         }
-
+        /// <summary>
+        /// Сравнение дат
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <param name="dateTime1"></param>
+        /// <param name="withHourAndMinute"></param>
+        /// <returns></returns>
         private bool CompareDate(DateTime dateTime, DateTime dateTime1, bool withHourAndMinute)
         {
             if (withHourAndMinute)
             {
+                var minuteInDateTime = new DateTime(dateTime.Ticks - dateTime.Ticks % TimeSpan.TicksPerSecond);
+                var minuteInDateTime1 = new DateTime(dateTime1.Ticks - dateTime1.Ticks % TimeSpan.TicksPerSecond);
+                //return minuteInDateTime1 == minuteInDateTime;
                 return dateTime.Day == dateTime1.Day && dateTime.Year == dateTime1.Year &&
                 dateTime.Month == dateTime1.Month && dateTime.Hour == dateTime1.Hour &&
                 dateTime.Minute == dateTime1.Minute;
             }
             else
             {
+                var dayInDateTime = new DateTime(dateTime.Ticks - dateTime.Ticks % TimeSpan.TicksPerHour);
+                var dayInDateTime1 = new DateTime(dateTime1.Ticks - dateTime1.Ticks % TimeSpan.TicksPerHour);
+                //return dayInDateTime1 == dayInDateTime;
                 return dateTime.Day == dateTime1.Day && dateTime.Year == dateTime1.Year &&
                 dateTime.Month == dateTime1.Month;
             }
@@ -173,7 +227,8 @@ namespace DiaryApp
             {
                 var index = _diaryTaskList.TaskList.FindIndex(x => CompareDate(x.TaskDate, _displayedDiaryTaskList.TaskList[TaskListBox.SelectedIndex].TaskDate, true) &&
                     x.Name == _displayedDiaryTaskList.TaskList[TaskListBox.SelectedIndex].Name);
-                _diaryTaskList.TaskList.RemoveAt(index);
+                RemoveDiaryTask(index);
+                //_diaryTaskList.TaskList.RemoveAt(index);
                 _displayedDiaryTaskList.TaskList.RemoveAt(TaskListBox.SelectedIndex);
                 
             }
@@ -183,7 +238,7 @@ namespace DiaryApp
             UpdateMainList();
         }
 
-        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        private void MonthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             if (e.Start.Day == e.End.Day)
             {
@@ -267,7 +322,8 @@ namespace DiaryApp
                 {
                     var index = _diaryTaskList.TaskList.FindIndex(x => CompareDate(x.TaskDate, changedTask.TaskDate, true) &&
                         x.Name == changedTask.Name);
-                    _diaryTaskList.TaskList.RemoveAt(index);
+                    RemoveDiaryTask(index);
+                    //_diaryTaskList.TaskList.RemoveAt(index);
                     _diaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
                     _displayedFindDiaryTaskList.TaskList.RemoveAt(n);
                     _displayedFindDiaryTaskList.TaskList.Add(addTaskForm.DiaryTask);
@@ -284,7 +340,7 @@ namespace DiaryApp
             this.Show();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             bool ring = false;
             DiaryTask task = null;

@@ -22,9 +22,10 @@ namespace DiaryApp
         public PrefForm(string pathTOAdudio, Color fontColor, Color color)
         {
             InitializeComponent();
+            
             try
             {
-                DiaryPreferences = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\-click-nice_1.mp3"
+                DiaryPreferences = new DiaryPreferences(Environment.CurrentDirectory.ToString() + @"\Ring.mp3"
                     , Color.Black
                     , Color.LightSalmon);
             }
@@ -48,8 +49,6 @@ namespace DiaryApp
         {
             this.BackColor = color;
             this.ForeColor = fontColor;
-            //acceptButton.ForeColor = fontColor;
-            //AuidoNameLabel.ForeColor = fontColor;
         }
 
         private void Accept_Click(object sender, EventArgs e)
@@ -74,6 +73,8 @@ namespace DiaryApp
 
         private void ChangeAudio_Click(object sender, EventArgs e)
         {
+            openFileDialog.Filter = @"audio(*.wav;*.mp3)|*.mp3;*.wav";
+            openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ChangeFileLabel(openFileDialog.FileName);

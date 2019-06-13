@@ -96,7 +96,7 @@
             this.RemindCheckBox.TabIndex = 5;
             this.RemindCheckBox.Text = "Напомнить";
             this.RemindCheckBox.UseVisualStyleBackColor = false;
-            this.RemindCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.RemindCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // AddfileButton
             // 
@@ -109,7 +109,7 @@
             this.AddfileButton.TabIndex = 6;
             this.AddfileButton.Text = "Прикрепить файл";
             this.AddfileButton.UseVisualStyleBackColor = false;
-            this.AddfileButton.Click += new System.EventHandler(this.button1_Click);
+            this.AddfileButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // FileNameLabel
             // 
@@ -133,7 +133,7 @@
             this.ConfirmButton.TabIndex = 8;
             this.ConfirmButton.Text = "Закончить";
             this.ConfirmButton.UseVisualStyleBackColor = false;
-            this.ConfirmButton.Click += new System.EventHandler(this.button2_Click);
+            this.ConfirmButton.Click += new System.EventHandler(this.Button2_Click);
             // 
             // RedactPictureBox
             // 
@@ -145,7 +145,7 @@
             this.RedactPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.RedactPictureBox.TabIndex = 9;
             this.RedactPictureBox.TabStop = false;
-            this.RedactPictureBox.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.RedactPictureBox.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // AddTaskForm
             // 

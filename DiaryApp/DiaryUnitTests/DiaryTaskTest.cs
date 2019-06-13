@@ -29,7 +29,11 @@ namespace DiaryUnitTests
             Assert.AreEqual(taskDate, test.TaskDate);
             Assert.AreEqual(remind, test.Remind);
             Assert.AreEqual(remind1Date, test.ReminderDate);
-            Assert.AreEqual(filename, test.FileName);
+            if (filename != "")
+            {
+                Assert.AreEqual(Environment.CurrentDirectory + @"\390.txt", test.FileName);
+            }
+            
         }
 
         [Test]
@@ -44,7 +48,10 @@ namespace DiaryUnitTests
             Assert.AreEqual(name, test.Name);
             Assert.AreEqual(taskDate, test.TaskDate);
             Assert.AreEqual(remind, test.Remind);
-            Assert.AreEqual(filename, test.FileName);
+            if (filename != "")
+            {
+                Assert.AreEqual(Environment.CurrentDirectory + @"\390.txt", test.FileName);
+            }
         }
 
         [Test]

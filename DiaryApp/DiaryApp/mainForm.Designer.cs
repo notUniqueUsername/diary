@@ -84,7 +84,7 @@
             this.monthCalendar1.Location = new System.Drawing.Point(2, 31);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 3;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateSelected);
             // 
             // FindTextBox
             // 
@@ -194,19 +194,19 @@
             this.OpenToolStripMenuItem,
             this.CloseToolStripMenuItem});
             this.NotifyContextMenuStrip.Name = "contextMenuStrip1";
-            this.NotifyContextMenuStrip.Size = new System.Drawing.Size(122, 48);
+            this.NotifyContextMenuStrip.Size = new System.Drawing.Size(181, 70);
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OpenToolStripMenuItem.Text = "Открыть";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenNotify_Click);
             // 
             // CloseToolStripMenuItem
             // 
             this.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem";
-            this.CloseToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.CloseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.CloseToolStripMenuItem.Text = "Закрыть";
             this.CloseToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
@@ -214,7 +214,7 @@
             // 
             this.TimerForRemind.Enabled = true;
             this.TimerForRemind.Interval = 1000;
-            this.TimerForRemind.Tick += new System.EventHandler(this.timer1_Tick);
+            this.TimerForRemind.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // Mainform
             // 
