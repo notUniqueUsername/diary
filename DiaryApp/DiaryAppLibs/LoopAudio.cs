@@ -12,7 +12,7 @@ namespace DiaryAppLibs
     /// </summary>
     public class LoopAudio : WaveStream
     {
-        private WaveStream _sourceStream;
+        private WaveStream _sourceStream; 
 
         /// <summary>
         /// Creates a new Loop stream
@@ -28,7 +28,7 @@ namespace DiaryAppLibs
         /// <summary>
         /// Use this to turn looping on or off
         /// </summary>
-        public bool EnableLooping { get; set; }
+        private bool EnableLooping { get; set; }
 
         /// <summary>
         /// Return source stream's wave format
