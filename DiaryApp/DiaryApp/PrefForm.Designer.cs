@@ -73,16 +73,16 @@
             this.ChangeFontButton.AutoSize = true;
             this.ChangeFontButton.Location = new System.Drawing.Point(12, 83);
             this.ChangeFontButton.Name = "ChangeFontButton";
-            this.ChangeFontButton.Size = new System.Drawing.Size(163, 34);
+            this.ChangeFontButton.Size = new System.Drawing.Size(221, 34);
             this.ChangeFontButton.TabIndex = 3;
-            this.ChangeFontButton.Text = "Выбрать шрифт";
+            this.ChangeFontButton.Text = "Выбрать цвет шрифта";
             this.ChangeFontButton.UseVisualStyleBackColor = true;
             this.ChangeFontButton.Click += new System.EventHandler(this.ChangeFontButton_Click);
             // 
             // ChangeBackColor
             // 
             this.ChangeBackColor.AutoSize = true;
-            this.ChangeBackColor.Location = new System.Drawing.Point(181, 83);
+            this.ChangeBackColor.Location = new System.Drawing.Point(239, 83);
             this.ChangeBackColor.Name = "ChangeBackColor";
             this.ChangeBackColor.Size = new System.Drawing.Size(197, 34);
             this.ChangeBackColor.TabIndex = 4;

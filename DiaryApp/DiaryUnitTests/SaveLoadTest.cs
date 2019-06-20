@@ -47,7 +47,7 @@ namespace DiaryUnitTests
 
         [Test]
         [TestCase(
-            TestName = "Тест десериализации спсика задач")]
+            TestName = "Тест десериализации списка задач")]
         public void LoadDiaryTaskListTest()
         {
             string path = @"D:\games\DiaryTest.diary";

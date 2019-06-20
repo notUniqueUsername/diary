@@ -90,7 +90,8 @@ namespace DiaryApp
         private void UpdateMainList()
         {
             var list = new List<string>();
-            if (_displayedDiaryTaskList.TaskList.Count !=0)
+            _displayedDiaryTaskList.TaskList.Sort((x1, x2) => x1.TaskDate.CompareTo(x2.TaskDate));
+            if (_displayedDiaryTaskList.TaskList.Count != 0)
             {
                 foreach (var item in _displayedDiaryTaskList.TaskList)
                 {
@@ -229,8 +230,12 @@ namespace DiaryApp
                     x.Name == _displayedDiaryTaskList.TaskList[TaskListBox.SelectedIndex].Name);
                 RemoveDiaryTask(index);
                 //_diaryTaskList.TaskList.RemoveAt(index);
-                _displayedDiaryTaskList.TaskList.RemoveAt(TaskListBox.SelectedIndex);
-                
+                //_displayedDiaryTaskList = _diaryTaskList;
+                if (_displayedDiaryTaskList.TaskList != _diaryTaskList.TaskList)
+                {
+                    _displayedDiaryTaskList.TaskList.RemoveAt(TaskListBox.SelectedIndex);
+                }
+
             }
             catch (ArgumentOutOfRangeException)
             {
