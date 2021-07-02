@@ -77,7 +77,7 @@ namespace DiaryAppLibs
         /// <param name="data">
         /// Список записываемых задач
         /// </param>
-        public static void SaveToFile(DiaryTaskList data, string filePath = "Standart")
+        public static void SaveToFile(DiaryTaskListContainer data, string filePath = "Standart")
         {
             if (filePath == "Standart")
             {
@@ -96,7 +96,7 @@ namespace DiaryAppLibs
         /// <returns>
         /// Список задач
         /// </returns>
-        public static DiaryTaskList LoadFromFile(string filePath = "Standart")
+        public static DiaryTaskListContainer LoadFromFile(string filePath = "Standart")
         {
             if (filePath == "Standart")
             {
@@ -108,27 +108,27 @@ namespace DiaryAppLibs
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryTaskList) serializer.Deserialize(file, typeof(DiaryTaskList));
+                    return (DiaryTaskListContainer) serializer.Deserialize(file, typeof(DiaryTaskListContainer));
                 }
             }
             catch (System.IO.FileNotFoundException)
             {
-                var project = new DiaryTaskList();
+                var project = new DiaryTaskListContainer();
                 SaveLoad.SaveToFile(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryTaskList) serializer.Deserialize(file, typeof(DiaryTaskList));
+                    return (DiaryTaskListContainer) serializer.Deserialize(file, typeof(DiaryTaskListContainer));
                 }
             }
             catch (ArgumentException)
             {
-                var project = new DiaryTaskList();
+                var project = new DiaryTaskListContainer();
                 SaveLoad.SaveToFile(project, filePath);
                 using (StreamReader file = File.OpenText(filePath))
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    return (DiaryTaskList)serializer.Deserialize(file, typeof(DiaryTaskList));
+                    return (DiaryTaskListContainer)serializer.Deserialize(file, typeof(DiaryTaskListContainer));
                 }
             }
         }

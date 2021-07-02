@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -46,6 +47,7 @@ namespace DiaryAppLibs
         {
             private set
             {
+
                 if (value != "")
                 {
                     if (!File.Exists(value))
@@ -59,6 +61,28 @@ namespace DiaryAppLibs
                     {
                         File.Copy(value, filepath);
                     }
+                    //создание ярлыка файла
+                    /*Type t = Type.GetTypeFromCLSID(new Guid("72C24DD5-D70A-438B-8A42-98424B88AFB8")); //Windows Script Host Shell Object
+                    dynamic shell = Activator.CreateInstance(t);
+                    try
+                    {
+                        var lnk = shell.CreateShortcut("sc.lnk");
+                        try
+                        {
+                            
+                            lnk.TargetPath = value;
+                            lnk.IconLocation = "shell32.dll, 1";
+                            lnk.Save();
+                        }
+                        finally
+                        {
+                            Marshal.FinalReleaseComObject(lnk);
+                        }
+                    }
+                    finally
+                    {
+                        Marshal.FinalReleaseComObject(shell);
+                    }*/
                     _filename = filepath;
                 }
                 else

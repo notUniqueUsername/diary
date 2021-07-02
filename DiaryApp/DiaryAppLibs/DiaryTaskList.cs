@@ -9,7 +9,7 @@ namespace DiaryAppLibs
     /// <summary>
     /// Класс содержащий логику и структуру списка задач
     /// </summary>
-    public class DiaryTaskList
+    public class DiaryTaskListContainer
     {
         /// <summary>
         /// Лист содержащий список всех задач
@@ -20,7 +20,7 @@ namespace DiaryAppLibs
         /// Конструктор класса если список есть
         /// </summary>
         /// <param name="tasklist">список</param>
-        public DiaryTaskList(List<DiaryTask> tasklist)
+        public DiaryTaskListContainer(List<DiaryTask> tasklist)
         {
             TaskList = tasklist;
         }
@@ -28,7 +28,7 @@ namespace DiaryAppLibs
         /// <summary>
         /// Конструктор класса по умолчанию
         /// </summary>
-        public DiaryTaskList()
+        public DiaryTaskListContainer()
         {
             TaskList = new List<DiaryTask>();
         }

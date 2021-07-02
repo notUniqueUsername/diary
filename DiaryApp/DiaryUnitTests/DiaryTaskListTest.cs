@@ -30,7 +30,7 @@ namespace DiaryUnitTests
             TestName = "Позитивный тест конструктора по умолчанию")]
         public void ConstructorTaskListTest()
         {
-            DiaryTaskList diaryTaskList = new DiaryTaskList();
+            DiaryTaskListContainer diaryTaskList = new DiaryTaskListContainer();
             Assert.AreEqual(0,diaryTaskList.TaskList.Count);
         }
 
@@ -39,7 +39,7 @@ namespace DiaryUnitTests
             TestName = "Позитивный тест конструктора с аргументами")]
         public void ConstructorWithArgsTaskListTest()
         {
-            DiaryTaskList diaryTaskList = new DiaryTaskList(_diaryTasks);
+            DiaryTaskListContainer diaryTaskList = new DiaryTaskListContainer(_diaryTasks);
             for (int i = 0; i < diaryTaskList.TaskList.Count; i++)
             {
                 Assert.AreEqual(_diaryTasks[i].Name, diaryTaskList.TaskList[i].Name);

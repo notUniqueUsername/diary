@@ -32,9 +32,9 @@ namespace DiaryApp
         }
         private DiaryPreferences _diaryPreferences;
         private DiarySoundPlayer sp;
-        private DiaryTaskList _diaryTaskList;
-        private DiaryTaskList _displayedDiaryTaskList;
-        private DiaryTaskList _displayedFindDiaryTaskList;
+        private DiaryTaskListContainer _diaryTaskList;
+        private DiaryTaskListContainer _displayedDiaryTaskList;
+        private DiaryTaskListContainer _displayedFindDiaryTaskList;
 
         private void Hello()
         {
@@ -247,7 +247,7 @@ namespace DiaryApp
         {
             if (e.Start.Day == e.End.Day)
             {
-                _displayedDiaryTaskList = new DiaryTaskList();
+                _displayedDiaryTaskList = new DiaryTaskListContainer();
                 foreach (var task in _diaryTaskList.TaskList)
                 {
                     if (CompareDate(task.TaskDate, e.Start, false))
@@ -259,7 +259,7 @@ namespace DiaryApp
             }
             else
             {
-                _displayedDiaryTaskList = new DiaryTaskList();
+                _displayedDiaryTaskList = new DiaryTaskListContainer();
                 foreach (var task in _diaryTaskList.TaskList)
                 {
                     if ((e.End.Day >= task.TaskDate.Day && task.TaskDate.Day >= e.Start.Day) &&
@@ -296,7 +296,7 @@ namespace DiaryApp
         {
             if (FindTextBox.Text.Trim().Length != 0)
             {
-                _displayedFindDiaryTaskList = new DiaryTaskList();
+                _displayedFindDiaryTaskList = new DiaryTaskListContainer();
                 foreach (var item in _diaryTaskList.TaskList)
                 {
                     if (item.Name.Contains(FindTextBox.Text.Trim()))

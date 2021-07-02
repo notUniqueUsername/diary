@@ -20,6 +20,8 @@ namespace DiaryUnitTests
             TestName = "Позитивный тест конструктора: с напоминанием, с прикрепленным файлом")]
         [TestCase("Что-то сделать", "2019.12.13 0:00:00", true, "", "2019.12.12 0:00:00",
             TestName = "Позитивный тест конструктора: с напоминанием, без прикрепленного файла")]
+        [TestCase("Что-то сделать", "2019.12.13 0:00:00", true, "", "01.01.0001 0:00:00",
+            TestName = "тест костыля даты напоминания")]
         public void ConstructorWithRemindDiaryTaskTest(string name, string taskDateString, bool remind, string filename, string remindDate)
         {
             DateTime.TryParse(taskDateString, out var taskDate);
@@ -35,6 +37,7 @@ namespace DiaryUnitTests
             }
             
         }
+
 
         [Test]
         [TestCase("Что-то сделать", "2019.12.13 0:00:00", false, @"C:\Users\Valeriy\Desktop\390.txt",

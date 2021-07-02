@@ -44,7 +44,7 @@ namespace DiaryAppLibs
                 if (File.Exists(value))
                 {
                     var valueLength = value.Length;
-                    if (valueLength > 5)
+                    if (valueLength >= 5)
                     {
                         var extension = value.Substring(valueLength - 3);
                         if (extension == "wav" || extension == "mp3")

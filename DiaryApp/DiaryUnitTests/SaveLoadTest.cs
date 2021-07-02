@@ -12,7 +12,7 @@ namespace DiaryUnitTests
     {
         private List<DiaryTask> _diaryTasks = new List<DiaryTask>();
         private DiaryTask _diaryTask;
-        private DiaryTaskList _diaryTaskList;
+        private DiaryTaskListContainer _diaryTaskList;
         private DiaryPreferences _diaryPreferences;
         [SetUp]
         public void Setup()
@@ -27,7 +27,7 @@ namespace DiaryUnitTests
                 _diaryTask = new DiaryTask(name, DateTime.Now, false);
                 _diaryTasks.Add(_diaryTask);
             }
-            _diaryTaskList = new DiaryTaskList(_diaryTasks);
+            _diaryTaskList = new DiaryTaskListContainer(_diaryTasks);
             //File.CreateText(@"D:\games\DiaryTest.diary");
         }
 

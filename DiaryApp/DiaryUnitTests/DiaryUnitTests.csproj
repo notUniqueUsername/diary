@@ -53,6 +53,7 @@
     <Compile Include="DiaryTaskTest.cs" />
     <Compile Include="SaveLoadTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TechTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
